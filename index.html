@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT SOP Wiki</title>
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --primary-color: #0066cc;
+            --primary-hover: #0052a3;
+            --accent-color: #00b386;
+            --warning-color: #ff9800;
+            --success-color: #4caf50;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b0b0b0;
+            --border-color: #404040;
+            --primary-color: #4da3ff;
+            --primary-hover: #6eb3ff;
+            --accent-color: #00d9a3;
+            --warning-color: #ffb74d;
+            --success-color: #66bb6a;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .wiki-header {
+            background: var(--bg-secondary);
+            border-bottom: 3px solid var(--primary-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .header-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-menu {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 6px 12px;
+        }
+
+        @media (max-width: 767px) {
+            .btn-menu {
+                display: block;
+            }
+        }
+
+        .btn-theme {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-theme:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* --- MAIN LAYOUT --- */
+        .wiki-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        @media (min-width: 768px) {
+            .wiki-container {
+                grid-template-columns: 250px 1fr;
+            }
+        }
+
+        /* --- SIDEBAR --- */
+        .wiki-sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            padding: 0;
+            height: auto;
+            position: static;
+            top: auto;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .sidebar-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .sidebar-nav {
+            max-height: none;
+            overflow: visible;
+        }
+
+        .sidebar-nav.collapsed {
+            max-height: none;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin: 0;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            border-radius: 0;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: var(--primary-color);
+            color: white;
+            border-left-color: var(--primary-color);
+        }
+
+        /* --- CONTENT AREA --- */
+        .wiki-content {
+            background: var(--bg-secondary);
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+            padding: 24px 20px;
+        }
+
+        /* --- SECTIONS --- */
+        .section {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* --- CONTENT ELEMENTS --- */
+        .content-block {
+            margin-bottom: 20px;
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* --- PASSWORD FIELD STYLES --- */
+        .password-field {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            margin: 8px 0;
+        }
+
+        .password-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            user-select: none;
+        }
+
+        .password-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .password-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px 8px;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-btn:hover {
+            color: var(--primary-hover);
+        }
+
+        .btn-copy-password {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-password:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-copy-password.copied {
+            background: var(--success-color);
+        }
+
+        /* --- CARDS/GRID --- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        .card-content {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* --- TABLES --- */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 12px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background: var(--bg-primary);
+        }
+
+        /* --- LIST STYLES --- */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        /* --- CODE/COPYABLE --- */
+        .copyable {
+            background: var(--bg-primary);
+            color: var(--primary-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+        }
+
+        .copyable:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* --- FOOTER --- */
+        .wiki-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* --- EMPTY STATE --- */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 767px) {
+            .wiki-container {
+                grid-template-columns: 1fr;
+            }
+
+            .wiki-sidebar {
+                position: fixed;
+                left: 0;
+                top: 80px;
+                width: 100%;
+                max-width: 250px;
+                height: calc(100vh - 80px);
+                overflow-y: auto;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 99;
+            }
+
+            .wiki-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .wiki-content {
+                padding: 16px;
+            }
+
+            .section {
+                padding: 16px 0;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .password-field {
+                flex-wrap: wrap;
+            }
+
+            /* Overlay when sidebar is open */
+            body.sidebar-open::before {
+                content: '';
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 98;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="wiki-header">
+    <div class="header-content">
+        <div>
+            <div class="header-title">IT SOP Wiki</div>
+            <div class="header-subtitle">Standard Operating Procedures</div>
+        </div>
+        <div class="header-controls">
+            <button id="menu-toggle" class="btn-menu">☰</button>
+            <button id="theme-toggle" class="btn-theme">🌙 Dark</button>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="wiki-container">
+    <!-- SIDEBAR -->
+    <div class="wiki-sidebar" id="wiki-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">📑 Contents</div>
+        </div>
+        <nav class="sidebar-nav" id="sidebar-nav">
+            <ul id="sidebar-list">
+                <!-- Dynamically populated -->
+            </ul>
+        </nav>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="wiki-content">
+        <div id="sections-container">
+            <!-- Sections will be populated here -->
+        </div>
+        <div class="wiki-footer">
+            <p>&copy; 2025 IT Department. All rights reserved.</p>
+            <a href="old.html" target="_blank">OLD page</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // WIKI DATA STRUCTURE
+    // ============================================
+    const wikiData = [
+        {
+            id: "getting-started",
+            title: "Getting Started",
+            content: `
+                <div class="content-block">
+                    <p class="content-text">Welcome to the IT Standard Operating Procedure Wiki. This is where all standard operating procedures and documentation are stored.</p>
+                </div>
+            `
+        },
+        {
+            id: "systems",
+            title: "Systems & Infrastructure",
+            content: `
+                <div class="content-block">
+                    <p class="section-subtitle">Overview</p>
+                    <p class="content-text">Documentation for core system configurations and infrastructure setup.</p>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Server Information</p>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Server Name</th>
+                                    <th>IP Address</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Primary Server</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.1.10</span></td>
+                                    <td>Active</td>
+                                </tr>
+                                <tr>
+                                    <td>Backup Server</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.1.11</span></td>
+                                    <td>Active</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `
+        },
+        {
+            id: "accounts",
+            title: "Accounts & Credentials",
+            content: `
+                <div class="content-block">
+                    <p class="section-subtitle">Account Management</p>
+                    <p class="content-text">Securely manage credentials with show/hide and copy functionality.</p>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Example Credentials</p>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Local System Admin</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">admin</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="$3c@Z0net3m" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>IT Unit</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">itunit</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="P0RT@L$4kath$erv" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Public Health</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">PubHealth</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathPh13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Accounts</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Accounts</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathAcc13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pharmacy</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Pharmacy</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathPharm13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Records</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Records</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathRec13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Oncology</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Oncology</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathOnc13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Obstetrics and Oncology</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Ong</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathObgyn13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Obstetrics and Oncology Library</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">OngLib</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathLib13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Childhealth Library</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">ChildhealthLibrary</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathLib13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Surgery Library</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Surgery Library</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathLib13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Medicine Library</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Medicine Library</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathLib13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Estates</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Estates</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathEst13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pharmacy Stores</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">PharmStores</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathPharm13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Medical Stores</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">medstores</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathStore13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Supply Chain</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">proc</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathScm13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Theatre</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">theatre</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathThe13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Health Insurance</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">HealthInsu</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathInsu13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Inservice Training</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">istu</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathInserv13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Human Resource Unit</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Hrunit</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathHru13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Laboratory</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Labs</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathLab13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Secretary</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">secretary</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathSec13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Welfare</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Welfare</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathWell13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Consulting Room</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">ConRoom</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathCr13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Revenue</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Revenue</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathRev13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Audit Secretary</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Audit Sec</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="Kathas1" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Inpatients</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Ward</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathInp13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Technical Services</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Techserve</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathTs13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cserv</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Cserv</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathServ13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Security</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Security</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathSec13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Business managers</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Business managers</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathBM13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Psychiatry unit</td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">Psychiatry unit</span></td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="KathPsych13" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `
+        },
+        {
+            id: "network",
+            title: "Network Configuration",
+            content: `
+                <div class="content-block">
+                    <p class="section-subtitle">WiFi Networks</p>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Network Name</th>
+                                    <th>Password</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Office WiFi</td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="WiFi@Office2025" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Guest WiFi</td>
+                                    <td>
+                                        <div class="password-field">
+                                            <input type="password" class="password-input" value="Guest@2025" readonly>
+                                            <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
+                                            <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `
+        }
+    ];
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    function initWiki() {
+        renderSidebar();
+        renderContent();
+        setupThemeToggle();
+        setupMobileMenu();
+    }
+
+    function setupMobileMenu() {
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('wiki-sidebar');
+        const body = document.body;
+
+        if (!menuToggle) return;
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            body.classList.toggle('sidebar-open');
+        });
+
+        // Close sidebar when clicking on a link
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                body.classList.remove('sidebar-open');
+            });
+        });
+
+        // Close sidebar when clicking overlay
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('open');
+                body.classList.remove('sidebar-open');
+            }
+        });
+    }
+
+    function renderSidebar() {
+        const sidebarList = document.getElementById('sidebar-list');
+        sidebarList.innerHTML = wikiData.map((section, index) => `
+            <li>
+                <a href="#${section.id}" class="sidebar-link" data-index="${index}">
+                    ${section.title}
+                </a>
+            </li>
+        `).join('');
+
+        // Add click handlers
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const index = link.dataset.index;
+                scrollToSection(index);
+            });
+        });
+
+        // Set first item as active
+        if (sidebarList.querySelector('.sidebar-link')) {
+            sidebarList.querySelector('.sidebar-link').classList.add('active');
+        }
+    }
+
+    function renderContent() {
+        const container = document.getElementById('sections-container');
+        if (wikiData.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">📚</div>
+                    <div class="empty-state-title">No Content Yet</div>
+                    <p>Start adding sections to your wiki.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = wikiData.map((section) => `
+            <div class="section" id="${section.id}">
+                <h2 class="section-title">${section.title}</h2>
+                ${section.content}
+            </div>
+        `).join('');
+    }
+
+    function scrollToSection(index) {
+        const section = document.getElementById(wikiData[index].id);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // ============================================
+    // THEME TOGGLE
+    // ============================================
+    function setupThemeToggle() {
+        const toggleBtn = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        const savedTheme = localStorage.getItem('wiki-theme') || 'light';
+        htmlEl.setAttribute('data-theme', savedTheme);
+        updateThemeButton(savedTheme);
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('wiki-theme', newTheme);
+            updateThemeButton(newTheme);
+        });
+    }
+
+    function updateThemeButton(theme) {
+        const btn = document.getElementById('theme-toggle');
+        btn.innerHTML = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+    }
+
+    // ============================================
+    // PASSWORD MANAGEMENT
+    // ============================================
+    function togglePasswordVisibility(btn) {
+        const field = btn.parentElement;
+        const input = field.querySelector('.password-input');
+        const isPassword = input.type === 'password';
+        
+        input.type = isPassword ? 'text' : 'password';
+        btn.innerHTML = isPassword ? '🙈' : '👁️';
+    }
+
+    function copyPassword(btn) {
+        const field = btn.parentElement;
+        const input = field.querySelector('.password-input');
+        const password = input.value;
+
+        navigator.clipboard.writeText(password).then(() => {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✓ Copied';
+            btn.classList.add('copied');
+
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('copied');
+            }, 1500);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+        });
+    }
+
+    // ============================================
+    // COPYABLE FUNCTIONALITY
+    // ============================================
+    function copyToClipboard(element) {
+        const text = element.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = element.innerText;
+            element.innerText = '✓ Copied';
+
+            setTimeout(() => {
+                element.innerText = originalText;
+            }, 1200);
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+        });
+    }
+
+    // ============================================
+    // START
+    // ============================================
+    document.addEventListener('DOMContentLoaded', initWiki);
+</script>
+
+</body>
+</html>
