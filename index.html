@@ -588,13 +588,76 @@
                             <tbody>
                                 <tr>
                                     <td>Primary Server</td>
-                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.1.10</span></td>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.20.2</span></td>
                                     <td>Active</td>
                                 </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Reserved IP Addresses</p>
+                    <p class="content-text">The following IP addresses are reserved for organizational infrastructure and should not be assigned to client devices.</p>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td>Backup Server</td>
-                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.1.11</span></td>
-                                    <td>Active</td>
+                                    <th>IP Address</th>
+                                    <th>Network Range</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.20.2</span></td>
+                                    <td>192.168.20.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.20.7</span></td>
+                                    <td>192.168.20.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.20.8</span></td>
+                                    <td>192.168.20.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.20.10</span></td>
+                                    <td>192.168.20.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">192.168.20.13</span></td>
+                                    <td>192.168.20.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">172.16.12.1</span></td>
+                                    <td>172.16.x.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">172.16.14.8</span></td>
+                                    <td>172.16.x.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">172.16.15.7</span></td>
+                                    <td>172.16.x.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">172.16.14.14</span></td>
+                                    <td>172.16.x.x</td>
+                                    <td>Reserved</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="copyable" onclick="copyToClipboard(this)">172.16.14.13</span></td>
+                                    <td>172.16.x.x</td>
+                                    <td>Reserved</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -618,7 +681,7 @@
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>Insert USB drive with Windows installation media</li>
                                 <li>Ensure the drive contains a valid Windows 10/11 ISO</li>
-                                <li>Use Media Creation Tool from Microsoft if creating bootable USB</li>
+                                <li>Use Media Creation Tool from Microsoft if creating bootable USB<br> Or use third-party software like Rufus</li>
                             </ul>
                         </li>
                         <li>
@@ -645,11 +708,10 @@
                             </ul>
                         </li>
                         <li>
-                            <strong>Product Key Entry (optional)</strong>
+                            <strong>Product Key Entry </strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Enter your Windows product key if available</li>
+                                <li>Select I don't have a product key option if asked.</li>
                                 <li>Click "Next" to proceed</li>
-                                <li>You can also enter the key after installation if needed</li>
                             </ul>
                         </li>
                         <li>
@@ -661,9 +723,16 @@
                             </ul>
                         </li>
                         <li>
+                            <strong>OS Selection</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Select the Windows 10 Pro edition Or</li>
+                                <li>Windows 11 Pro edition</li>
+                                <li>Click "Next"</li>
+                            </ul>
+                        </li>
+                        <li>
                             <strong>Select Installation Type</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Upgrade:</strong> Keep files, settings, and applications</li>
                                 <li><strong>Custom (Clean Install):</strong> Install fresh on selected partition</li>
                             </ul>
                         </li>
@@ -704,6 +773,7 @@
                                 <li>When OOBE asks for network selection, select your WiFi or Ethernet</li>
                                 <li>If you want to skip: click "I don't have internet" or similar option</li>
                                 <li>This allows proceeding without active network connection</li>
+                                <li>If no option to skip, proceed to next step to use CMD</li>
                             </ul>
                         </li>
                         <li>
@@ -714,18 +784,15 @@
                             </ul>
                         </li>
                         <li>
-                            <strong>Common CMD Commands for OOBE Bypass</strong>
+                            <strong>Disable Network Requirement (Method 1)</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><span class="copyable" onclick="copyToClipboard(this)">tasklist</span> - View running processes</li>
-                                <li><span class="copyable" onclick="copyToClipboard(this)">taskkill /IM oobe.exe /F</span> - Close OOBE setup</li>
-                                <li><span class="copyable" onclick="copyToClipboard(this)">wpeutil reboot</span> - Reboot the system</li>
-                                <li><span class="copyable" onclick="copyToClipboard(this)">wpeutil shutdown</span> - Shutdown the system</li>
-                                <li><span class="copyable" onclick="copyToClipboard(this)">ipconfig</span> - Check network configuration</li>
-                                <li><span class="copyable" onclick="copyToClipboard(this)">ping 8.8.8.8</span> - Test internet connectivity</li>
+                                <li>In the Command Prompt, type: <span class="copyable" onclick="copyToClipboard(this)">OOBE\\BYPASSNRO</span></li>
+                                <li>Press Enter to execute the command</li>
+                                <li>The setup will restart and allow you to skip network setup</li>
                             </ul>
                         </li>
                         <li>
-                            <strong>Disable Network Requirement (Method 1)</strong>
+                            <strong>Disable Network Requirement (Method 2)</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>In Command Prompt, type: <span class="copyable" onclick="copyToClipboard(this)">taskkill /IM oobe.exe /F</span></li>
                                 <li>Press Enter to force close OOBE</li>
@@ -733,7 +800,7 @@
                             </ul>
                         </li>
                         <li>
-                            <strong>Disable Network Requirement (Method 2)</strong>
+                            <strong>Disable Network Requirement (Method 3)</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>Navigate to network settings folder: <span class="copyable" onclick="copyToClipboard(this)">cd C:\\Windows\\System32</span></li>
                                 <li>Disable network-related tasks: <span class="copyable" onclick="copyToClipboard(this)">taskkill /IM NetworkManager.exe /F</span> (if applicable)</li>
@@ -745,8 +812,8 @@
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>When prompted for network, select "I don't have internet"</li>
                                 <li>Create a local account instead of Microsoft account</li>
-                                <li>Username: <span class="copyable" onclick="copyToClipboard(this)">Administrator</span> (or custom)</li>
-                                <li>Password: Set a strong local password or leave blank</li>
+                                <li>Username: <span class="copyable" onclick="copyToClipboard(this)">Admin</span> </li>
+                                <li>Password: Leave blank</li>
                                 <li>Complete the setup wizard</li>
                             </ul>
                         </li>
@@ -755,7 +822,6 @@
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>Once Windows boots to desktop, go to Settings > Network & Internet</li>
                                 <li>Configure WiFi or Ethernet connection</li>
-                                <li>Run Windows Update to get latest drivers and patches</li>
                             </ul>
                         </li>
                     </ol>
@@ -763,16 +829,13 @@
                 <div class="content-block">
                     <p class="section-subtitle">Post-Installation Steps</p>
                     <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li>Install chipset drivers from manufacturer website</li>
-                        <li>Update graphics drivers (NVIDIA, AMD, Intel)</li>
-                        <li>Install network drivers if not auto-detected</li>
-                        <li>Run Windows Update to get security patches and updates</li>
-                        <li>Install antivirus software</li>
-                        <li>Configure firewall settings</li>
-                        <li>Install required applications for your organization</li>
+                        <li>Install microsoft office software</li>
+                        <li>Install Google Chrome and set as default browser</li>
+                        <li>Install other required applications for your organization</li>
                         <li>Join to domain (kathsp.org) - See Domain Join section below</li>
-                        <li>Create user accounts with appropriate permissions</li>
+                        <li>Create user accounts with appropriate permissions or sign into domain accounts</li>
                         <li>Enable system backups and recovery options</li>
+                        <li>Install NetAgent{Kaspersky} for endpoint protection after joining Domain.</li>
                     </ul>
                 </div>
                 <div class="content-block">
@@ -826,8 +889,8 @@
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>Click "OK" button</li>
                                 <li>System prompts for domain admin credentials</li>
-                                <li>Username format: <span class="copyable" onclick="copyToClipboard(this)">kathsp.org\[username]</span> or just <span class="copyable" onclick="copyToClipboard(this)">Administrator</span></li>
-                                <li>Enter administrator password</li>
+                                <li>Username format: <span class="copyable" onclick="copyToClipboard(this)">itunit</span> </li>
+                                <li>Enter itunit password</li>
                                 <li>Click "OK"</li>
                             </ul>
                         </li>
@@ -852,7 +915,7 @@
                             <strong>Verify Domain Join</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>After restart, login screen shows domain is available</li>
-                                <li>Login format: <span class="copyable" onclick="copyToClipboard(this)">kathsp\[username]</span> or use UPN: <span class="copyable" onclick="copyToClipboard(this)">username@kathsp.org</span></li>
+                                <li>Login format: <span class="copyable" onclick="copyToClipboard(this)">kathsp\\[username]</span> or use UPN: <span class="copyable" onclick="copyToClipboard(this)">username@kathsp.org</span></li>
                                 <li>System Properties should show "Domain: kathsp.org"</li>
                                 <li>Open Command Prompt and run: <span class="copyable" onclick="copyToClipboard(this)">whoami</span> - should show "kathsp\\username"</li>
                             </ul>
