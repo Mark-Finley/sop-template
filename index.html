@@ -547,7 +547,6 @@
         </div>
         <div class="wiki-footer">
             <p>&copy; 2025 IT Department. All rights reserved.</p>
-            <a href="old.html" target="_blank">OLD page</a>
         </div>
     </div>
 </div>
@@ -1176,8 +1175,11 @@
                 </div>
                 <div class="content-block">
                     <p class="section-subtitle">Example Credentials</p>
-                    <div class="table-responsive">
-                        <table>
+                    <div style="margin-bottom: 15px;">
+                        <input type="text" id="credentialSearch" placeholder="🔍 Search accounts, usernames..." style="width: 100%; padding: 12px; border: 2px solid var(--border-color); border-radius: 5px; font-size: 14px; background-color: var(--bg-secondary); color: var(--text-primary); transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--primary-color)'" onblur="this.style.borderColor='var(--border-color)'" oninput="filterCredentials(this.value)">
+                    </div>
+                    <div class="table-responsive" id="credentialsTableContainer" style="display: none;">
+                        <table id="credentialsTable">
                             <thead>
                                 <tr>
                                     <th>Account</th>
@@ -1618,7 +1620,7 @@
                                     <td>Office WiFi</td>
                                     <td>
                                         <div class="password-field">
-                                            <input type="password" class="password-input" value="WiFi@Office2025" readonly>
+                                            <input type="password" class="password-input" value="12345678" readonly>
                                             <button class="password-btn" onclick="togglePasswordVisibility(this)">👁️</button>
                                             <button class="btn-copy-password" onclick="copyPassword(this)">Copy</button>
                                         </div>
@@ -1790,6 +1792,46 @@
         }).catch(err => {
             console.error('Failed to copy:', err);
         });
+    }
+
+    // ============================================
+    // CREDENTIALS SEARCH FILTER
+    // ============================================
+    function filterCredentials(searchTerm) {
+        const table = document.getElementById('credentialsTable');
+        const tableContainer = document.getElementById('credentialsTableContainer');
+        if (!table || !tableContainer) return;
+
+        const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        const term = searchTerm.toLowerCase().trim();
+
+        // Hide table if search is empty
+        if (term === '') {
+            tableContainer.style.display = 'none';
+            return;
+        }
+
+        // Show table when searching
+        tableContainer.style.display = '';
+
+        // Filter rows based on search term
+        let hasVisibleRows = false;
+        Array.from(rows).forEach(row => {
+            const account = row.cells[0].textContent.toLowerCase();
+            const username = row.cells[1].textContent.toLowerCase();
+            
+            if (account.includes(term) || username.includes(term)) {
+                row.style.display = '';
+                hasVisibleRows = true;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Hide table if no matches found
+        if (!hasVisibleRows) {
+            tableContainer.style.display = 'none';
+        }
     }
 
     // ============================================
