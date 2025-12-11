@@ -600,6 +600,507 @@
                         </table>
                     </div>
                 </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Windows 10/11 Installation Guide</p>
+                    <p class="content-text"><strong>Prerequisites:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Windows 10 or 11 installation media (USB drive or ISO)</li>
+                        <li>System must meet minimum hardware requirements</li>
+                        <li>Access to BIOS/UEFI settings</li>
+                        <li>Network connection (optional, can be configured after installation)</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Step-by-Step Installation Process</p>
+                    <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                        <li>
+                            <strong>Prepare Installation Media</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Insert USB drive with Windows installation media</li>
+                                <li>Ensure the drive contains a valid Windows 10/11 ISO</li>
+                                <li>Use Media Creation Tool from Microsoft if creating bootable USB</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Boot from Installation Media</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Restart the computer</li>
+                                <li>Press the boot selection key during startup (usually F12, F2, ESC, or DEL)</li>
+                                <li>Select USB drive from the boot menu</li>
+                                <li>Press Enter to boot from installation media</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Windows Setup Welcome Screen</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Select Language, Time & Currency Format, and Keyboard or Input Method</li>
+                                <li>Click "Next"</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Installation Type Selection</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Click "Install Now"</li>
+                                <li>If you need to repair, recover, or reset Windows, select that option</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Product Key Entry (optional)</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Enter your Windows product key if available</li>
+                                <li>Click "Next" to proceed</li>
+                                <li>You can also enter the key after installation if needed</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>License Agreement</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Read the license terms</li>
+                                <li>Check "I accept the license terms"</li>
+                                <li>Click "Next"</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Select Installation Type</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Upgrade:</strong> Keep files, settings, and applications</li>
+                                <li><strong>Custom (Clean Install):</strong> Install fresh on selected partition</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Disk Selection for Custom Install</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Select the disk or partition where Windows will be installed</li>
+                                <li>Click "Next" to proceed</li>
+                                <li>You can create, format, or delete partitions if needed</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Installation Process</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Windows will now copy files and install components</li>
+                                <li>This may take 10-30 minutes depending on system speed</li>
+                                <li>System will restart multiple times automatically</li>
+                                <li>Do not remove the installation media or shut down the computer</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Setup Completion</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Once installation completes, remove the USB drive</li>
+                                <li>System will boot into Windows for the first time</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Bypass Network Using OOBE CMD</p>
+                    <p class="content-text"><strong>What is OOBE?</strong><br/>Out-of-Box Experience (OOBE) is the initial setup wizard when Windows first boots. Sometimes network connectivity is required or you may want to skip it.</p>
+                    <p class="content-text" style="margin-top: 10px;"><strong>How to Bypass Network Requirement:</strong></p>
+                    <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                        <li>
+                            <strong>During OOBE Network Selection</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>When OOBE asks for network selection, select your WiFi or Ethernet</li>
+                                <li>If you want to skip: click "I don't have internet" or similar option</li>
+                                <li>This allows proceeding without active network connection</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Open Command Prompt in OOBE</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Press <strong>Shift + F10</strong> during OOBE setup</li>
+                                <li>This will open Command Prompt with administrative privileges</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Common CMD Commands for OOBE Bypass</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><span class="copyable" onclick="copyToClipboard(this)">tasklist</span> - View running processes</li>
+                                <li><span class="copyable" onclick="copyToClipboard(this)">taskkill /IM oobe.exe /F</span> - Close OOBE setup</li>
+                                <li><span class="copyable" onclick="copyToClipboard(this)">wpeutil reboot</span> - Reboot the system</li>
+                                <li><span class="copyable" onclick="copyToClipboard(this)">wpeutil shutdown</span> - Shutdown the system</li>
+                                <li><span class="copyable" onclick="copyToClipboard(this)">ipconfig</span> - Check network configuration</li>
+                                <li><span class="copyable" onclick="copyToClipboard(this)">ping 8.8.8.8</span> - Test internet connectivity</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Disable Network Requirement (Method 1)</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>In Command Prompt, type: <span class="copyable" onclick="copyToClipboard(this)">taskkill /IM oobe.exe /F</span></li>
+                                <li>Press Enter to force close OOBE</li>
+                                <li>The setup will restart and allow you to skip network setup</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Disable Network Requirement (Method 2)</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Navigate to network settings folder: <span class="copyable" onclick="copyToClipboard(this)">cd C:\\Windows\\System32</span></li>
+                                <li>Disable network-related tasks: <span class="copyable" onclick="copyToClipboard(this)">taskkill /IM NetworkManager.exe /F</span> (if applicable)</li>
+                                <li>This prevents OOBE from checking network connectivity</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Complete Setup Without Internet</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>When prompted for network, select "I don't have internet"</li>
+                                <li>Create a local account instead of Microsoft account</li>
+                                <li>Username: <span class="copyable" onclick="copyToClipboard(this)">Administrator</span> (or custom)</li>
+                                <li>Password: Set a strong local password or leave blank</li>
+                                <li>Complete the setup wizard</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Configure Network After Setup</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Once Windows boots to desktop, go to Settings > Network & Internet</li>
+                                <li>Configure WiFi or Ethernet connection</li>
+                                <li>Run Windows Update to get latest drivers and patches</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Post-Installation Steps</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Install chipset drivers from manufacturer website</li>
+                        <li>Update graphics drivers (NVIDIA, AMD, Intel)</li>
+                        <li>Install network drivers if not auto-detected</li>
+                        <li>Run Windows Update to get security patches and updates</li>
+                        <li>Install antivirus software</li>
+                        <li>Configure firewall settings</li>
+                        <li>Install required applications for your organization</li>
+                        <li>Join to domain (kathsp.org) - See Domain Join section below</li>
+                        <li>Create user accounts with appropriate permissions</li>
+                        <li>Enable system backups and recovery options</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Joining Computer to kathsp.org Domain</p>
+                    <p class="content-text"><strong>Prerequisites Before Domain Join:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Computer has stable network connection (Ethernet recommended)</li>
+                        <li>Computer name is unique and set to organizational naming convention</li>
+                        <li>System date and time are correct (within 5 minutes of domain controller)</li>
+                        <li>All drivers installed and Windows Update completed</li>
+                        <li>Domain admin credentials available or authorization from IT</li>
+                        <li>Computer account pre-created in Active Directory (contact IT if needed)</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Method 1: Join Domain Using GUI (Recommended)</p>
+                    <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                        <li>
+                            <strong>Open System Properties</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Right-click on "This PC" or "My Computer" on desktop</li>
+                                <li>Select "Properties"</li>
+                                <li>Or press <span class="copyable" onclick="copyToClipboard(this)">Win + Pause Break</span></li>
+                                <li>Or open Settings > System > About > Advanced system settings</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Access System Properties Dialog</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Look for "Computer name, domain, and workgroup settings" section</li>
+                                <li>Click "Change settings" button</li>
+                                <li>System Properties window opens</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Click Change Button</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>In Computer Name tab, click "Change..." button</li>
+                                <li>Computer Name/Domain Changes dialog opens</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Select Domain Option</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Select "Domain:" radio button (not Workgroup)</li>
+                                <li>Type domain name: <span class="copyable" onclick="copyToClipboard(this)">kathsp.org</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Click OK and Enter Credentials</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Click "OK" button</li>
+                                <li>System prompts for domain admin credentials</li>
+                                <li>Username format: <span class="copyable" onclick="copyToClipboard(this)">kathsp.org\[username]</span> or just <span class="copyable" onclick="copyToClipboard(this)">Administrator</span></li>
+                                <li>Enter administrator password</li>
+                                <li>Click "OK"</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Wait for Domain Join Process</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>System contacts domain controller</li>
+                                <li>Creates computer account in Active Directory</li>
+                                <li>Establishes trust relationship with domain</li>
+                                <li>May take 30 seconds to 2 minutes</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Restart Computer</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>System prompts to restart</li>
+                                <li>Click "Restart Now" (save all work first)</li>
+                                <li>Computer will restart and apply domain settings</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Verify Domain Join</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>After restart, login screen shows domain is available</li>
+                                <li>Login format: <span class="copyable" onclick="copyToClipboard(this)">kathsp\[username]</span> or use UPN: <span class="copyable" onclick="copyToClipboard(this)">username@kathsp.org</span></li>
+                                <li>System Properties should show "Domain: kathsp.org"</li>
+                                <li>Open Command Prompt and run: <span class="copyable" onclick="copyToClipboard(this)">whoami</span> - should show "kathsp\\username"</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Method 2: Join Domain Using Command Line (PowerShell)</p>
+                    <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                        <li>
+                            <strong>Open PowerShell as Administrator</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Press <span class="copyable" onclick="copyToClipboard(this)">Win + X</span> and select "Windows PowerShell (Admin)"</li>
+                                <li>Or search for "PowerShell", right-click and "Run as administrator"</li>
+                                <li>Type "Yes" at UAC prompt</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Run Domain Join Command</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Copy and run: <span class="copyable" onclick="copyToClipboard(this)">Add-Computer -DomainName kathsp.org -Restart</span></li>
+                                <li>System prompts for domain credentials</li>
+                                <li>Enter domain admin username and password</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Advanced: Join with Specific Credentials</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Run: <span class="copyable" onclick="copyToClipboard(this)">$cred = Get-Credential</span></li>
+                                <li>Enter domain admin credentials in prompt</li>
+                                <li>Then run: <span class="copyable" onclick="copyToClipboard(this)">Add-Computer -DomainName kathsp.org -Credential $cred -Restart</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Computer Restarts Automatically</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>-Restart parameter causes automatic restart</li>
+                                <li>Save all work before running command</li>
+                                <li>Computer joins domain and restarts</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Verify Domain Join</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>After restart, open PowerShell and run: <span class="copyable" onclick="copyToClipboard(this)">Get-WmiObject Win32_ComputerSystem | select domain</span></li>
+                                <li>Output should show: <span class="copyable" onclick="copyToClipboard(this)">domain : kathsp.org</span></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Post-Domain Join Configuration</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>First Login:</strong> Use domain credentials in format "kathsp\\username" or "username@kathsp.org"</li>
+                        <li><strong>Group Policy Update:</strong> Run <span class="copyable" onclick="copyToClipboard(this)">gpupdate /force</span> to apply domain group policies</li>
+                        <li><strong>Map Network Drives:</strong> Configure network share access to departmental file servers</li>
+                        <li><strong>Printer Configuration:</strong> Connect to network printers using domain settings</li>
+                        <li><strong>Software Deployment:</strong> Applications deploy automatically via Group Policy if configured</li>
+                        <li><strong>Antivirus Integration:</strong> Verify antivirus updates and integration with domain management</li>
+                        <li><strong>VPN Setup:</strong> Configure VPN client if required for remote access</li>
+                        <li><strong>Time Sync:</strong> Run <span class="copyable" onclick="copyToClipboard(this)">w32tm /resync</span> to sync with domain time server</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Domain Join Troubleshooting</p>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);"><strong>Error/Issue</strong></td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);"><strong>Cause &amp; Solution</strong></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">The specified domain does not exist or cannot be contacted</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Domain controller unreachable. Verify network connection, check DNS settings with <span class="copyable" onclick="copyToClipboard(this)">nslookup kathsp.org</span>, check IP address</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Access denied or invalid credentials</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Wrong username/password or insufficient permissions. Verify domain admin credentials, ensure account has delegation rights in AD</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">The computer name already exists</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Computer name must be unique. Change computer name and retry, contact IT to remove old computer account from AD</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Time skew/System time is out of sync</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">System time must be within 5 minutes of domain controller. Set correct time/date in BIOS or Settings, sync time: <span class="copyable" onclick="copyToClipboard(this)">w32tm /resync</span></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Computer account disabled in Active Directory</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Contact IT to enable computer account in AD, try rejoining domain after account is enabled</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Cannot login after successful domain join</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Verify user account exists in AD, check user login permissions, verify correct username format (kathsp\\username)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Group Policies not applying</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Run <span class="copyable" onclick="copyToClipboard(this)">gpupdate /force</span>, wait 15 minutes for full application, check Event Viewer for policy errors</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Important Domain Information for kathsp.org</p>
+                    <div style="background-color: var(--bg-primary); padding: 15px; border-radius: 5px; margin-top: 10px; border-left: 4px solid var(--accent-color);">
+                        <ul style="margin-left: 20px; line-height: 2;">
+                            <li><strong>Domain Name:</strong> <span class="copyable" onclick="copyToClipboard(this)">kathsp.org</span></li>
+                            <li><strong>Domain Controller:</strong> Contact IT for primary domain controller address</li>
+                            <li><strong>NetBIOS Name:</strong> <span class="copyable" onclick="copyToClipboard(this)">KATHSP</span></li>
+                            <li><strong>Login Format:</strong> <span class="copyable" onclick="copyToClipboard(this)">KATHSP\\username</span> or <span class="copyable" onclick="copyToClipboard(this)">username@kathsp.org</span></li>
+                            <li><strong>IT Support Contact:</strong> Contact IT Help Desk for domain join issues</li>
+                            <li><strong>Password Policy:</strong> Check with IT for password requirements and expiration policy</li>
+                            <li><strong>Group Policy Refresh:</strong> Policies update every 90 minutes (or after <span class="copyable" onclick="copyToClipboard(this)">gpupdate /force</span>)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Troubleshooting Common Issues</p>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                        <tr style="background-color: var(--bg-primary); border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);"><strong>Issue</strong></td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);"><strong>Solution</strong></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Cannot boot from USB</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Check BIOS boot order, ensure USB is first, disable Secure Boot if needed</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Missing drivers after installation</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Use Device Manager to identify unknown devices, download drivers from manufacturer</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Installation freezes or hangs</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Try safe mode, disable unnecessary hardware, check for bad sectors on disk</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">No internet after installation</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Install network drivers, check cable connections, verify DHCP is enabled</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">OOBE won't proceed</td>
+                            <td style="padding: 10px; border: 1px solid var(--border-color);">Press Shift+F10 to open CMD, use taskkill to close OOBE, or disconnect network</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Organizational Troubleshooting & Support</p>
+                    <p class="content-text"><strong>Network Connectivity Issues</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Cannot Connect to Corporate WiFi:</strong> Verify WiFi password, check if MAC address is whitelisted, ensure date/time is correct, disable VPN if active</li>
+                        <li><strong>Intermittent Network Drops:</strong> Update network drivers, check for interference, move away from microwaves/cordless phones, run <span class="copyable" onclick="copyToClipboard(this)">ipconfig /renew</span> to refresh DHCP</li>
+                        <li><strong>Slow Network Speed:</strong> Check with <span class="copyable" onclick="copyToClipboard(this)">netstat -e</span> for network stats, run <span class="copyable" onclick="copyToClipboard(this)">ping 8.8.8.8 -t</span> for latency test, verify cable connections, disable background updates</li>
+                        <li><strong>Cannot Access File Shares:</strong> Check network credentials, ensure user has proper permissions, verify network path is correct, run <span class="copyable" onclick="copyToClipboard(this)">ping [servername]</span> to confirm connectivity</li>
+                        <li><strong>Network Diagnostics:</strong> Use <span class="copyable" onclick="copyToClipboard(this)">ipconfig /all</span> for detailed network info, <span class="copyable" onclick="copyToClipboard(this)">nslookup kathsp.org</span> to test DNS, <span class="copyable" onclick="copyToClipboard(this)">tracert google.com</span> to trace route to host</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="content-text"><strong>Domain & Active Directory Issues</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Cannot Join Domain:</strong> Verify computer name is unique, check domain controller availability, ensure network connectivity, run <span class="copyable" onclick="copyToClipboard(this)">nslookup [domain.com]</span>, verify credentials</li>
+                        <li><strong>Login Fails After Domain Join:</strong> Ensure time sync with domain controller (max 5 min difference), check Active Directory account is enabled, verify user has login permissions</li>
+                        <li><strong>Domain Group Policies Not Applying:</strong> Run <span class="copyable" onclick="copyToClipboard(this)">gpupdate /force</span> to refresh policies, check event viewer for errors, verify user is in correct AD groups</li>
+                        <li><strong>Cannot Map Network Drives:</strong> Check permissions on network share, verify user account credentials, ensure network path exists, disable credential caching issues</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="content-text"><strong>Hardware & Device Issues</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Monitor/Display Not Detected:</strong> Update graphics drivers, check cable connections (both power and data), try different display port, restart computer to redetect</li>
+                        <li><strong>Keyboard/Mouse Not Working:</strong> Check batteries (wireless), verify USB ports are functional, try different USB ports, restart device driver in Device Manager</li>
+                        <li><strong>Printer Not Printing:</strong> Check printer is on network, verify printer drivers are installed, clear print queue with <span class="copyable" onclick="copyToClipboard(this)">net stop spooler & net start spooler</span>, check printer IP address</li>
+                        <li><strong>Scanner Not Recognized:</strong> Install manufacturer drivers, verify USB cable, check device in Device Manager, restart scanner and computer</li>
+                        <li><strong>Audio Issues (No Sound):</strong> Check volume settings, verify audio drivers are updated, check Device Manager for audio device errors, ensure speakers are powered on</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="content-text"><strong>Performance & System Issues</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>High CPU Usage:</strong> Check Task Manager for resource-heavy processes, disable startup programs, run antivirus scan, check for malware</li>
+                        <li><strong>Low Disk Space:</strong> Run Disk Cleanup, delete temporary files, uninstall unused applications, archive old files to network storage</li>
+                        <li><strong>Slow System Performance:</strong> Disable unnecessary services, update drivers, increase RAM if needed, check disk for errors with <span class="copyable" onclick="copyToClipboard(this)">chkdsk C: /F</span></li>
+                        <li><strong>System Crashes or Blue Screen:</strong> Check Event Viewer for error codes, update drivers, check hard drive health, disable problematic startup programs</li>
+                        <li><strong>Memory Errors:</strong> Run <span class="copyable" onclick="copyToClipboard(this)">mdsched.exe</span> to test RAM, check for faulty modules, reseat RAM modules physically</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="content-text"><strong>Software & Application Issues</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Application Won't Install:</strong> Run as Administrator, disable antivirus temporarily, ensure sufficient disk space, check system requirements compatibility</li>
+                        <li><strong>Application Crashes on Startup:</strong> Repair/reinstall application, check for compatible Windows version, disable problematic plugins, check Event Viewer logs</li>
+                        <li><strong>License Activation Fails:</strong> Check internet connectivity, verify product key validity, check date/time settings, contact software vendor support</li>
+                        <li><strong>Office 365 Not Working:</strong> Sign out and sign back in, repair Office installation, check subscription status online, clear Office cache</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="content-text"><strong>Security & VPN Issues</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Cannot Connect to VPN:</strong> Verify VPN credentials, check VPN server availability, ensure VPN client is updated, temporarily disable firewall to test</li>
+                        <li><strong>VPN Disconnects Frequently:</strong> Check internet stability, update VPN client, adjust connection timeout settings, switch network (WiFi to Ethernet)</li>
+                        <li><strong>Firewall Blocking Applications:</strong> Add exception in Windows Defender Firewall, allow application through firewall, check third-party firewall rules</li>
+                        <li><strong>Antivirus Quarantines Software:</strong> Whitelist application path in antivirus, report false positive to vendor, ensure antivirus definitions are current</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="content-text"><strong>User Account & Login Issues</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Forgotten Password:</strong> Use password reset disk if available, verify account in Active Directory, contact IT Help Desk for account unlock/reset</li>
+                        <li><strong>Account Locked After Failed Logins:</strong> Wait for lockout duration to expire (usually 15-30 min) or contact IT to unlock, verify correct credentials</li>
+                        <li><strong>Corrupted User Profile:</strong> Create new local user account, copy important files from old profile, delete corrupted profile in System Properties</li>
+                        <li><strong>Permission Denied Errors:</strong> Check NTFS permissions on files/folders, verify user account has necessary access rights, run affected application as Administrator</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">Diagnostic Commands for IT Support</p>
+                    <p class="content-text"><strong>Essential Troubleshooting Commands:</strong></p>
+                    <div style="background-color: var(--bg-primary); padding: 15px; border-radius: 5px; margin-top: 10px; border-left: 4px solid var(--primary-color);">
+                        <code style="font-family: 'Courier New', monospace; line-height: 1.8;">
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">systeminfo</span> - Display complete system information</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">ipconfig /all</span> - Show detailed network configuration</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">nslookup google.com</span> - Test DNS resolution</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">ping -t 8.8.8.8</span> - Continuous ping test for connectivity</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">tracert google.com</span> - Trace network route to destination</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">netstat -ano</span> - Show network connections and process IDs</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">tasklist /v</span> - Display all running processes with details</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">wmic logicaldisk get name,size,freespace</span> - Show disk space info</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">gpresult /h gpresult.html</span> - Generate Group Policy report</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">msinfo32</span> - Open System Information GUI</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">devmgmt.msc</span> - Open Device Manager</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">eventvwr.msc</span> - Open Event Viewer</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">services.msc</span> - Manage Windows Services</div>
+                            <div style="margin-bottom: 8px;"><span class="copyable" onclick="copyToClipboard(this)">diskmgmt.msc</span> - Open Disk Management</div>
+                        </code>
+                    </div>
+                </div>
+                <div class="content-block">
+                    <p class="section-subtitle">When to Contact IT Support</p>
+                    <p class="content-text"><strong>Escalate to IT Help Desk when:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Hardware requires replacement (monitor, keyboard, HDD, RAM)</li>
+                        <li>Cannot connect to domain or corporate network after basic troubleshooting</li>
+                        <li>Critical business application fails and prevents work</li>
+                        <li>Security concerns or suspicious activity detected</li>
+                        <li>System shows Blue Screen of Death (BSOD) repeatedly</li>
+                        <li>Account is locked or disabled in Active Directory</li>
+                        <li>Printer or network share access issues affecting multiple users</li>
+                        <li>Suspected malware or security breach</li>
+                        <li>Any hardware device not recognized after driver updates</li>
+                        <li>Software license activation issues</li>
+                    </ul>
+                </div>
             `
         },
         {
