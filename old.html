@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KATH IT Unit SOP</title>
+    <style>
+        /* --- CSS VARIABLES (Light Mode Default) --- */
+        :root {
+            --bg-color: #e9ecef;
+            --container-bg: #ffffff;
+            --text-color: #333333;
+            --primary-color: #0056b3; /* Hospital Blue */
+            --secondary-bg: #f4f4f4;
+            --border-color: #dddddd;
+            --step-bg: #f9f9f9;
+            --confidential-bg: #fff3cd;
+            --confidential-text: #856404;
+            --copy-bg: #eef;
+            --copy-text: #000;
+            --copy-hover: #dbeafe;
+            --success-color: #28a745;
+        }
+
+        /* --- DARK MODE VARIABLES --- */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --primary-color: #4da3ff; /* Lighter blue for dark contrast */
+            --secondary-bg: #2d2d2d;
+            --border-color: #444444;
+            --step-bg: #252525;
+            --confidential-bg: #3e3008;
+            --confidential-text: #ffd700;
+            --copy-bg: #333;
+            --copy-text: #ffffff;
+            --copy-hover: #444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative; /* For positioning the toggle */
+        }
+
+        /* Dark Mode Button Styling */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            background-color: var(--primary-color);
+            color: var(--container-bg); /* Adapts to theme mostly white/dark */
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 30px;
+            font-size: 18px;
+        }
+        
+        /* Specific fix for text inside the blue headers in dark mode */
+        [data-theme="dark"] h3 {
+            color: #121212; 
+            font-weight: bold;
+        }
+
+        .step-box {
+            background-color: var(--step-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        /* Click to Copy Styles */
+        .copy-target {
+            background-color: var(--copy-bg);
+            color: var(--copy-text);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px dashed var(--border-color);
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+        .copy-target:hover {
+            background-color: var(--copy-hover);
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+        .copy-target:active {
+            transform: scale(0.98);
+        }
+        .copied-success {
+            background-color: var(--success-color) !important;
+            color: white !important;
+            border-color: var(--success-color) !important;
+        }
+        .icon-copy::after {
+            content: " ❐";
+            opacity: 0.5;
+            font-size: 0.8em;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: var(--secondary-bg);
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        tr:hover {
+            background-color: var(--step-bg);
+        }
+
+        /* Cards/Grid */
+        .server-block {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            flex: 1;
+            min-width: 250px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            background: var(--container-bg);
+        }
+
+        .confidential {
+            background-color: var(--confidential-bg);
+            color: var(--confidential-text);
+            padding: 10px;
+            text-align: center;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            border: 1px solid var(--confidential-text);
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="theme-toggle" class="theme-toggle-btn">🌙 Dark Mode</button>
+
+    <div class="confidential">
+        ⚠ CONFIDENTIAL: FOR IT UNIT USE ONLY
+    </div>
+
+    <header>
+        <h1>Komfo Anokye Teaching Hospital</h1>
+        <h2>IT Unit - Standard Operating Procedures (SOP)</h2>
+        <p style="font-size: 0.9em; opacity: 0.7;">(Click on any highlighted text to copy it)</p>
+    </header>
+
+    <h3>1. Windows OS Installation</h3>
+    <div class="step-box">
+        <strong>OOBE Bypass (No Internet Setup):</strong><br>
+        If installing Windows 11 and stuck on the network screen:
+        <ol>
+            <li>Press <strong>Shift + F10</strong> to open Command Prompt.</li>
+            <li>Click the command below to copy, then paste it into the CMD window:</li>
+            <br>
+            <span class="copy-target icon-copy" onclick="copyText(this)">OOBE\BYPASSNRO</span>
+            <br><br>
+            <li>The system will restart. Select "I don't have internet" to create a local account.</li>
+        </ol>
+    </div>
+
+    <h3>2. Domain Configuration</h3>
+    
+    <table style="width: auto;">
+        <tr>
+            <th>Setting</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Domain Name</td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">kathsp.org</span></td>
+        </tr>
+        <tr>
+            <td>Workgroup</td>
+            <td>(Leave Default or Change to Domain)</td>
+        </tr>
+    </table>
+    <p><em>Note: Ensure DNS settings allow resolution of kathsp.org before joining.</em></p>
+
+    <h3>3. Network & Server Configs</h3>
+    <p><strong>Required Software:</strong> Install <code>NetAgent</code> on all client machines.</p>
+    
+    <div class="server-block">
+        <div class="card">
+            <strong>KSSERV Server IPs</strong>
+            <ul>
+                <li><span class="copy-target icon-copy" onclick="copyText(this)">172.16.192.5</span></li>
+                <li style="margin-top:5px"><span class="copy-target icon-copy" onclick="copyText(this)">172.16.12.4</span></li>
+                <li style="margin-top:5px"><span class="copy-target icon-copy" onclick="copyText(this)">192.168.20.12</span></li>
+            </ul>
+        </div>
+        <div class="card">
+            <strong>LHIMS Application</strong>
+            <ul>
+                <li>Status: UP</li>
+                <li>IP: <span class="copy-target icon-copy" onclick="copyText(this)">172.16.14.14</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>4. Credential Repository</h3>
+    
+    <h4>🔐 WiFi Access</h4>
+    <table>
+        <tr>
+            <th>SSID / Location</th>
+            <th>Password</th>
+        </tr>
+        <tr>
+            <td>UniFi</td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">passwordEno</span></td>
+        </tr>
+        <tr>
+            <td>Conference Room</td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">KathCr13</span></td>
+        </tr>
+        <tr>
+            <td>Ward</td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">KathInp13</span></td>
+        </tr>
+        <tr>
+            <td>Social Welfare</td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">KathWell13</span></td>
+        </tr>
+    </table>
+
+    <h4>🔐 Admin & Systems</h4>
+    <table>
+        <tr>
+            <th>Account Context</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+        <tr>
+            <td>IT Unit</td>
+            <td>Itunit</td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">1c0nBR0W$ER@1ct</span></td>
+        </tr>
+        <tr>
+            <td>Local Administrator</td>
+            <td>Admin</td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">P@$$4zC0MP$</span></td>
+        </tr>
+    </table>
+
+    <h4>🔐 Tablet / Google Account</h4>
+    <table>
+        <tr>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Recovery/Alt</th>
+        </tr>
+        <tr>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">Kathhspit@gmail.com</span></td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">K@thT@b123</span></td>
+            <td><span class="copy-target icon-copy" onclick="copyText(this)">K@th1tmail</span></td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        &copy; Komfo Anokye Teaching Hospital IT Unit. Do not share externally.
+    </div>
+</div>
+
+<script>
+    // --- COPY FUNCTIONALITY ---
+    function copyText(element) {
+        const originalText = element.innerText;
+        const cleanText = originalText.replace(' ❐', '').trim();
+
+        navigator.clipboard.writeText(cleanText).then(() => {
+            const originalWidth = element.offsetWidth;
+            element.innerText = "✔ Copied!";
+            element.classList.add('copied-success');
+            element.classList.remove('icon-copy');
+
+            setTimeout(() => {
+                element.innerText = originalText;
+                element.classList.remove('copied-success');
+                element.classList.add('icon-copy');
+            }, 1500);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            prompt("Copy failed. Please manually copy:", cleanText);
+        });
+    }
+
+    // --- DARK MODE FUNCTIONALITY ---
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+
+    // Check Local Storage for preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+        htmlEl.setAttribute('data-theme', currentTheme);
+        updateButtonText(currentTheme);
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        let theme = htmlEl.getAttribute('data-theme');
+        if (theme === 'dark') {
+            htmlEl.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            updateButtonText('light');
+        } else {
+            htmlEl.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            updateButtonText('dark');
+        }
+    });
+
+    function updateButtonText(theme) {
+        if (theme === 'dark') {
+            toggleBtn.innerText = '☀ Light Mode';
+        } else {
+            toggleBtn.innerText = '🌙 Dark Mode';
+        }
+    }
+</script>
+
+</body>
+</html>
